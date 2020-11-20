@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def flash_error_type(type)
     case type.to_sym
     when :alert
@@ -14,5 +13,4 @@ module ApplicationHelper
       type.to_s
     end
   end
-
 end

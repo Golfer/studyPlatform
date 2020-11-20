@@ -43,7 +43,7 @@ class CompaniesController < ApplicationController
     if company.destroy
       flash[:notice] = 'Company destroyed'
     else
-      flash[:alert] = company.errors.full_messag  es.join('; ')
+      flash[:alert] = company.errors.full_messages.join('; ')
     end
 
     respond_to do |format|
