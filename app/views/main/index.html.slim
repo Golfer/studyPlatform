@@ -1,0 +1,12 @@
+.row.no-gutter
+  .col-sm-12.col-lg-12.col-md-12.col-xl-12.vertical-align-2
+    .flash-alerts-blocks
+      = render partial: 'shared/flash_alerts'
+- if current_user.student?
+  H2 Companies
+  button type="button" class="btn btn-primary" data-toggle="modal" data-target="#companyModal"
+    | Add companies +
+  .companiesTable#companiesTable
+    = render partial: 'companies/table_companies'
+#formAddCompanyModal
+  = render partial: 'companies/modal_add_company'

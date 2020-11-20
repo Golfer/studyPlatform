@@ -1,0 +1,23 @@
+- countries = ISO3166::Country.all.select{|el| ["Europe", "South America"].include? el.continent }.map(&:name)
+- currency = ISO3166::Country.all.select{|el| ["Europe", "South America"].include? el.continent }.map(&:currency_code).uniq
+
+#companyModal.modal.fade aria-hidden="true" aria-labelledby="companyModalLabel" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5#companyModalLabel.modal-title Enter companies's information
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+      .modal-body
+        = form_for @company, url: user_companies_path(current_user),  authenticity_token: true, html: {class: 'form-horizontal', id: 'formAddCompany', role: 'form', remote: true } do |f|
+          = f.text_field :name, label_as_placeholder: true, required: true, error: true, type: 'text', placeholder: '* Name', class: 'form-control'
+          = f.select(:country, countries, {}, {class: 'form-control',  placeholder: '* Country'})
+          = f.select(:currency, currency, {}, {class: 'form-control',  placeholder: '* Currency'})
+          = f.hidden_field :user_id, value: current_user.id
+          = f.button 'Save changes', id: 'submitAddAgentForFounder', class: 'button btn btn-success btn-prof', title: 'Please fill and check all fields', data: {toggle: 'tooltip', placement: 'bottom'}, type: :submit
+          / .modal-footer
+        / button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+        / button.btn.btn-primary type="button"  Save changes
+
+
+          / Money::Currency.table.values.map{|el| el[:name]}

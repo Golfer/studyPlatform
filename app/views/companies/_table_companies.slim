@@ -1,0 +1,22 @@
+- current_user.reload
+- companies = current_user.companies.order(created_at: :desc)
+.row.justify-content-center
+  .col-md-8.col-sm-8.col-lg-8.col-lx-8
+    table.table.table-bordered
+      thead
+        tr.test_table
+          th scope="col"  Name
+          th scope="col"  Country
+          th scope="col"  Currency
+          th scope="col"  Action
+      tbody
+        - companies.each do |company|
+          tr
+            td= company.name
+            td= company.country
+            td= company.currency
+            td.table-td-grid
+              span.delete_company
+                = link_to 'Delete',  user_company_path(user_id: company.user.id, id: company.id), remote: true, method: :delete, data: { confirm: 'Are you sure?' }
+              span.edit_company
+                = link_to 'Edit',  edit_user_company_path(user_id: company.user.id, id: company.id)

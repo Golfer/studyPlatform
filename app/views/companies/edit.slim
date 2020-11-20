@@ -1,0 +1,13 @@
+- countries = ISO3166::Country.all.select { |el| ["Europe", "South America"].include? el.continent }.map(&:name)
+- currency = ISO3166::Country.all.select { |el| ["Europe", "South America"].include? el.continent }.map(&:currency_code).uniq
+.col-10.d-flex.justify-content-center
+  .row.no-gutter
+    .col-sm-12.col-lg-12.col-md-12.col-xl-12.vertical-align-2
+      .flash-alerts-blocks
+        = render partial: 'shared/flash_alerts'
+  = form_for @company, url: user_company_path(current_user),  authenticity_token: true, html: {class: 'form-horizontal', id: 'formAddCompany', role: 'form'} do |f|
+    = f.text_field :name, label_as_placeholder: true, required: true, error: false, type: "text", placeholder: "* Name", class: 'form-control'
+    = f.select(:country, countries, {} , {class: 'form-control', placeholder: '* Country'})
+    = f.select(:currency, currency, {}, {class: 'form-control', placeholder: '* Currency'})
+    = f.hidden_field :user_id, value: current_user.id
+    = f.button 'Update changes', id: 'submitAddAgentForFounder', class: 'button btn btn-success btn-prof', title: 'Please fill and check all fields', data: {toggle: 'tooltip', placement: "bottom"}, type: :submit
