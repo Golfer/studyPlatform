@@ -16,10 +16,9 @@ gem 'devise'
 gem 'pundit'
 gem 'carrierwave', '~> 2.0'
 gem 'rmagick'
-gem 'money'
-# gem 'currency_select'
-
 gem 'country_select', '~> 4.0'
+gem 'active_model_serializers'
+gem 'fast_jsonapi', git: 'https://github.com/Netflix/fast_jsonapi.git'
 
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
