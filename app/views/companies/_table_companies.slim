@@ -13,6 +13,9 @@
         - companies.each do |company|
           tr
             td= company.name
+            td
+              / = link_to 'Cash management',  cash_management_user_company_path(user_id: company.user.id, id: company.id)
+              = link_to 'Cash management',  "#"
             td= company.country
             td= company.currency
             td.table-td-grid
