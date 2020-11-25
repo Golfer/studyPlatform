@@ -5,8 +5,14 @@ import {fetchCompanies} from '../../actions/company';
 
 class ListOfCompanies extends Component {
     renderCompanies() {
-        this.props.companies.map((company, idx )=> < li key={idx}>{company.name}</li>)
-        // return this.props.companies.map(company => {(<li key={company.id}> {company.name}</li>)})
+        return this.props.companies.map((company, idx )=>
+                < li key={idx}>
+                    {company.name}
+                    <NavLink to={'/company/' + company.id}>Company details</NavLink>
+                    <NavLink to={'/company/' + company.id + '/cashCompany'}>Cash Statistic</NavLink>
+                    <NavLink to={'/company/' + company.id + '/cashManagement'}>Cash Managment Form</NavLink>
+                </li>
+            )
     }
 
     componentDidMount() {
@@ -16,14 +22,7 @@ class ListOfCompanies extends Component {
     render() {
         return (
             <ul>
-                {this.props.companies.map((company, idx )=>
-                    < li key={idx}>
-                        {company.name}
-                        <NavLink to={'/company/' + company.id}>Company details</NavLink>
-                        <NavLink to={'/company/' + company.id + '/cashCompany'}>Cash Statistic</NavLink>
-                        <NavLink to={'/company/' + company.id + '/cashManagement'}>Cash Managment Form</NavLink>
-                    </li>
-                )}
+                {this.renderCompanies()}
             </ul>
         )
     }
